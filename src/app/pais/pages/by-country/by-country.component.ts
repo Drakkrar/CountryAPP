@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { PaisService } from '../../service/pais.service';
+import { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-by-country',
@@ -9,35 +10,30 @@ import { PaisService } from '../../service/pais.service';
 })
 export class ByCountryComponent{
 
+  countries: Country[] = [];
   searchQuery: string = 'Hi';
-  isResponseEmpty: boolean = false;
 
-  @ViewChild('inputSearch') inputSearch!:ElementRef<HTMLInputElement>;
 
   constructor( private paisService: PaisService) { }
   
-  search(){
-    if (!this.searchQuery.length){
-      this.inputSearch.nativeElement.classList.add('is-invalid');
-      return;
-    }  
-    
-    if(this.inputSearch.nativeElement.classList.contains('is-invalid')){
-      this.inputSearch.nativeElement.classList.remove('is-invalid');
-    }
+  search(query:string){
 
-    this.isResponseEmpty = false;
+    this.searchQuery = query;
 
     this.paisService.searchCountry(this.searchQuery)
       .subscribe( resp =>{
         if(!resp){
-          this.isResponseEmpty = true;
+          this.countries = [];
           return;
         }
-        console.log(resp);
+        this.countries = resp;
       });
     
     this.searchQuery = '';
+  }
+
+  similar(query:string){
+    console.log(query);
   }
 
 }

@@ -3,47 +3,14 @@
 
 <div class="row">
     <div class="col">
-        <form (ngSubmit)="search()" autocomplete="off">
-            <input  type="text" 
-                    name="termino"
-                    class="form-control"
-                    [(ngModel)]="searchQuery"
-                    placeholder="Pais..."
-                    #inputSearch>
-
-        </form>
+        <app-country-search (onEnter)="search( $event )" 
+                            (onDebounce)="similar($event)"></app-country-search>
     </div>
 </div>
 <hr>
-<!-- <div    *ngIf="isResponseEmpty"
-        class="alert alert-danger">
-    No se encontro nada con el termino: {{searchQuery | uppercase}}
-</div> -->
 
 <div class="row">
-    <div class="col">
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Bandera</th>
-                    <th>Nombre</th>
-                    <th>Pobacion</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>flag</td>
-                    <td>name</td>
-                    <td>12312</td>
-                    <td><a href="#">Ver...</a></td>
-                </tr>
-            </tbody>
-        </table>
-
-
+    <div *ngIf="countries.length > 0" class="col" >
+        <app-country-table [displayedCountries]="countries" ></app-country-table>
     </div>
 </div>

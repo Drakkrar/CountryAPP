@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { AlertsService } from '../../shared/service/alerts.service';
-import { Country } from '../interfaces/country.interface'; 
+import { Country, Status } from '../interfaces/country.interface'; 
+import { Alert } from '../../shared/interfaces/alert.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +15,30 @@ export class PaisService {
   constructor( private http: HttpClient, private alertService: AlertsService) { }
   
   
-  private log(message:string) : void {
-    this.alertService.add(message);
+  private log(alert:Alert) : void {
+    this.alertService.add(alert);
   }
 
   private handleError<T>(operation = 'operation', alert?:string, result?: T){
     return (error: any): Observable<T> =>{
+      let obj: Alert = { 
+        id: Date.now(),
+        title:`${error.status}`,
+        msg: `${alert}`
+      }
       console.error(error);
       console.log(`${operation} failed due: ${error.message}`);
-      this.log(`${alert}`);
+      this.log(obj);
       return of(result as T);
     }
   }
   
-  searchCountry(query:string): Observable<Country> {
+  searchCountry(query:string): Observable<Country[]> {
 
     const url = `${this.apiUrl}/name/${query}`;
 
-    return this.http.get<Country>(url).pipe(
-      catchError(this.handleError<Country>('searchCountry', `${query} es un termino invalido.`))
+    return this.http.get<Country[]>(url).pipe(
+      catchError(this.handleError<Country[]>('searchCountry', `${query} es un termino invalido.`))
     );
   }
 

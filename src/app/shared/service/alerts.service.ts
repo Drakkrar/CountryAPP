@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Alert } from '../interfaces/alert.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertsService {
 
-  messages: string[] = [];
+  messages: Alert[] = [];
 
-  add(alert: string) : void {
+  add(alert: Alert) : void {
     if (this.messages.includes(alert)){
       return;
     }
@@ -19,16 +20,12 @@ export class AlertsService {
     this.messages.unshift(alert);
   }
 
-  deleteFromArr(query:string | null): void{
+  deleteFromArr(query:Alert | null): void{
     if ( query === null){
       return;
     }
-    
-    let index = this.messages.indexOf(query);
-
-    if (index > -1) {
-      this.messages.splice(index,1);
-    }
+    let index = this.messages.indexOf(query)
+    this.messages.splice(index,1)
   }
 
 }
