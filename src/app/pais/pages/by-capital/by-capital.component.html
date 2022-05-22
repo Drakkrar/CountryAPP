@@ -1,1 +1,17 @@
-<p>by-capital works!</p>
+<h2>Por Capital</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-country-search (onEnter)="search( $event )" 
+                            (onDebounce)="similar($event)"
+                            placeHolder="Por capital..."></app-country-search>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div *ngIf="countries.length > 0" class="col" >
+        <app-country-table [displayedCountries]="countries" ></app-country-table>
+    </div>
+</div>

@@ -11,7 +11,7 @@ import { Country } from '../../interfaces/country.interface';
 export class ByCountryComponent{
 
   countries: Country[] = [];
-  searchQuery: string = 'Hi';
+  searchQuery: string = '';
 
 
   constructor( private paisService: PaisService) { }

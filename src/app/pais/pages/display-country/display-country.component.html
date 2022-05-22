@@ -1,1 +1,75 @@
-<p>display-country works!</p>
+<div 
+    *ngIf="!country; else divCountry" class="alert alert-info">
+    Cargando...
+</div>
+
+<ng-template #divCountry>
+    <div class="row">
+        <div class="col-12">
+            <h1>País: <small>{{ country.name.common }}</small></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-4">
+            <h5>{{country.name.official}}</h5>
+            <img [src]="country.flags.png" class="img-thumbnail" />
+        </div>
+
+        <div class="col">
+            <h3>Información</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Población</strong> {{ country.population | number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Código numérico</strong> {{ country.ccn3 }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Código alpha3</strong> {{ country.cca3 }}
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <!-- TODO: Crear compontent -->
+
+    <div class="row accordion pt-2">
+        <app-badges-accordion   title="Zonas horarias"
+                                [tags]="country.timezones"
+                                headerID="zn-header"
+                                bodyID="zn-body"></app-badges-accordion>
+        <app-badges-accordion   title="Dominios de alto nivel"
+                                [tags]="country.tld"
+                                headerID="tld-header"
+                                bodyID="tld-body"></app-badges-accordion>
+        <app-badges-accordion   title="Traducciones"
+                                [tags]="cntryTranslations"
+                                headerID="trans-header"
+                                bodyID="trans-body"></app-badges-accordion>        
+    </div>
+
+    <!-- <h3 class="mt-2">Zonas horarias</h3>
+    <div class="row">
+        <div class="col" *ngFor="let zone of country.timezones">
+            
+            <span class="badge bg-primary mr-1">{{zone}}</span>
+
+        </div>
+    </div>
+    <h3 class="mt-2">Dominios</h3>
+    <div class="row">
+        <div class="col" *ngFor="let tld of country.tld">
+            <span class="badge bg-primary mr-1">{{tld}}</span>
+        </div>
+    </div> -->
+    <!-- <h3 class="mt-2">Traducciones</h3>
+    <div class="row">
+        <div class="col" *ngFor="let trad of translate">
+            <span class="badge bg-primary mr-1">{{trad.official}}</span>
+        </div>
+    </div> -->
+</ng-template>

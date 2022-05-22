@@ -11,6 +11,7 @@ import { ByRegionComponent } from './pages/by-region/by-region.component';
 import { DisplayCountryComponent } from './pages/display-country/display-country.component';
 import { CountryTableComponent } from './components/country-table/country-table.component';
 import { CountrySearchComponent } from './components/country-search/country-search.component';
+import { BadgesAccordionComponent } from './components/badges-accordion/badges-accordion.component';
 
 
 
@@ -21,7 +22,8 @@ import { CountrySearchComponent } from './components/country-search/country-sear
     ByRegionComponent,
     DisplayCountryComponent,
     CountryTableComponent,
-    CountrySearchComponent
+    CountrySearchComponent,
+    BadgesAccordionComponent
   ],
   imports: [
     CommonModule,

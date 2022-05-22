@@ -42,4 +42,22 @@ export class PaisService {
     );
   }
 
+  searchCapital(query:string): Observable<Country[]> {
+    
+    const url = `${this.apiUrl}/capital/${query}`;
+
+    return this.http.get<Country[]>(url).pipe(
+      catchError(this.handleError<Country[]>('searchCapital', `${query} es un termino invalido.`))
+    );
+  }
+
+  getByCode(id:string): Observable<Country[]> {
+
+    const url = `${this.apiUrl}/alpha/${id}`;
+
+    return this.http.get<Country[]>(url).pipe(
+      catchError(this.handleError<Country[]>('searchCountry', `${id} es un termino invalido.`))
+    );
+  }
+
 }

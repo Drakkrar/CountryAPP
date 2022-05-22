@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 
 
@@ -13,7 +13,9 @@ export class CountrySearchComponent implements OnInit {
   @Output() onEnter: EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
   @ViewChild('inputSearch') inputSearch!:ElementRef<HTMLInputElement>;
-  
+
+  @Input() placeHolder: string = '';  
+
   debouncer: Subject<string> = new Subject();
 
   ngOnInit(): void {

@@ -3,7 +3,7 @@
             name="termino"
             class="form-control"
             [(ngModel)]="searchQuery"
-            placeholder="Pais..."
+            [placeholder]="placeHolder"
             (input)="keyPressed()"
             autofocus
             #inputSearch>

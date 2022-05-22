@@ -1,0 +1,14 @@
+<div class="accordion-item">
+    <h2 class="accordion-header" id="{{headerID}}">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+bodyID" aria-expanded="true" [attr.aria-controls]="bodyID">
+        {{title}}
+        </button>
+    </h2>
+    <div id="{{bodyID}}" class="accordion-collapse collapse" [attr.aria-labelledby]="headerID">
+        <div class="row accordion-body">
+            <div class="col" *ngFor="let badge of tags">
+                <span class="badge bg-primary mr-1">{{badge}}</span>
+            </div>
+        </div>
+    </div>
+</div>
