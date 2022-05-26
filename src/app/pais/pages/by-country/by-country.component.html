@@ -1,14 +1,16 @@
-<h2>Por País</h2>
-<hr>
-
-<div class="row">
-    <div class="col">
-        <app-country-search (onEnter)="search( $event )" 
-                            (onDebounce)="similar($event)"
-                            placeHolder="Por pais..."></app-country-search>
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h2>Por País</h2>
+    <hr>
+    
+    <div class="row">
+        <div class="col">
+            <app-country-search (onEnter)="search( $event )" 
+                                (onDebounce)="similar($event)"
+                                placeHolder="Por pais..."></app-country-search>
+        </div>
     </div>
+    <hr>
 </div>
-<hr>
 
 <div class="row">
     <div *ngIf="countries.length > 0" class="col" >

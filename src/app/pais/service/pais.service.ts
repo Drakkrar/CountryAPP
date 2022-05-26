@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
+
 import { AlertsService } from '../../shared/service/alerts.service';
-import { Country, Status } from '../interfaces/country.interface'; 
+import { Country } from '../interfaces/country.interface'; 
 import { Alert } from '../../shared/interfaces/alert.interface';
 
 @Injectable({
@@ -11,6 +12,10 @@ import { Alert } from '../../shared/interfaces/alert.interface';
 export class PaisService {
 
   private apiUrl: string = 'https://restcountries.com/v3.1';
+
+  get httpParams() {
+    return new HttpParams().set('fields', 'flags,name,capital,population,cca2');
+  }
   
   constructor( private http: HttpClient, private alertService: AlertsService) { }
   
@@ -37,7 +42,7 @@ export class PaisService {
 
     const url = `${this.apiUrl}/name/${query}`;
 
-    return this.http.get<Country[]>(url).pipe(
+    return this.http.get<Country[]>(url, {params: this.httpParams}).pipe(
       catchError(this.handleError<Country[]>('searchCountry', `${query} es un termino invalido.`))
     );
   }
@@ -46,7 +51,7 @@ export class PaisService {
     
     const url = `${this.apiUrl}/capital/${query}`;
 
-    return this.http.get<Country[]>(url).pipe(
+    return this.http.get<Country[]>(url, {params: this.httpParams}).pipe(
       catchError(this.handleError<Country[]>('searchCapital', `${query} es un termino invalido.`))
     );
   }
@@ -56,7 +61,15 @@ export class PaisService {
     const url = `${this.apiUrl}/alpha/${id}`;
 
     return this.http.get<Country[]>(url).pipe(
-      catchError(this.handleError<Country[]>('searchCountry', `${id} es un termino invalido.`))
+      catchError(this.handleError<Country[]>('getByCode', `${id} es un termino invalido.`))
+    );
+  }
+
+  getByRegion(region:string): Observable<Country[]> {
+    const url = `${this.apiUrl}/region/${region}`;
+
+    return this.http.get<Country[]>(url, {params: this.httpParams}).pipe(
+      catchError(this.handleError<Country[]>('getByCode', `${region} es un termino invalido.`))
     );
   }
 

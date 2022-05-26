@@ -12,11 +12,11 @@ export class CountrySearchComponent implements OnInit {
 
   @Output() onEnter: EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
-  @ViewChild('inputSearch') inputSearch!:ElementRef<HTMLInputElement>;
 
   @Input() placeHolder: string = '';  
 
   debouncer: Subject<string> = new Subject();
+  searchQuery: string = '';
 
   ngOnInit(): void {
       this.debouncer
@@ -28,7 +28,6 @@ export class CountrySearchComponent implements OnInit {
       })
   }
   
-  searchQuery: string = '';
 
   keyPressed(){
     this.debouncer.next( this.searchQuery );
@@ -37,12 +36,7 @@ export class CountrySearchComponent implements OnInit {
 
   search(){
     if (!this.searchQuery.length){
-      this.inputSearch.nativeElement.classList.add('is-invalid');
       return;
-    }
-
-    if(this.inputSearch.nativeElement.classList.contains('is-invalid')){
-      this.inputSearch.nativeElement.classList.remove('is-invalid');
     }
 
     this.onEnter.emit(this.searchQuery);

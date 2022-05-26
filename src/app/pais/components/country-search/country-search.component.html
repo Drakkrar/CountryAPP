@@ -2,6 +2,7 @@
     <input  type="text" 
             name="termino"
             class="form-control"
+            [class.is-invalid]="searchQuery === ''"
             [(ngModel)]="searchQuery"
             [placeholder]="placeHolder"
             (input)="keyPressed()"
