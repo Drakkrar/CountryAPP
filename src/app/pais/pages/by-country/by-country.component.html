@@ -8,6 +8,17 @@
                                 (onDebounce)="similar($event)"
                                 placeHolder="Por pais..."></app-country-search>
         </div>
+
+        <ul *ngIf="displaySuggestions"
+            class="list-group position-relative">
+            <li *ngFor="let country of suggestions" 
+                class="list-group-item list-group-item-action">
+                    <a  class="nav-link"
+                        [routerLink]="['/country', country.cca2]">
+                        {{country.name.common}}
+                    </a>
+            </li>
+        </ul>
     </div>
     <hr>
 </div>

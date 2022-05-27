@@ -27,7 +27,6 @@ export class PaisService {
   private handleError<T>(operation = 'operation', alert?:string, result?: T){
     return (error: any): Observable<T> =>{
       let obj: Alert = { 
-        id: Date.now(),
         title:`${error.status}`,
         msg: `${alert}`
       }
@@ -43,7 +42,7 @@ export class PaisService {
     const url = `${this.apiUrl}/name/${query}`;
 
     return this.http.get<Country[]>(url, {params: this.httpParams}).pipe(
-      catchError(this.handleError<Country[]>('searchCountry', `${query} es un termino invalido.`))
+      catchError(this.handleError<Country[]>('searchCountry', `${query} es un termino de busqueda invalido.`))
     );
   }
 
